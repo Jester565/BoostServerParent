@@ -31,7 +31,7 @@ OPacket::OPacket(const char* loc, IDType senderID, std::vector <IDType> sendToID
 	this->sendToIDs = sendToIDs;
 }
 
-OPacket::OPacket(boost::shared_ptr<IPacket> iPack, bool copyData)
+OPacket::OPacket(IPacket* iPack, bool copyData)
 {
 	locKey[0] = iPack->getLocKey()[0];
 	locKey[1] = iPack->getLocKey()[1];

@@ -74,8 +74,8 @@ void PacketManager::process(boost::shared_ptr<IPacket> iPack)
 	}
 	else
 	{
-		OPacket* oPack = new OPacket(iPack, true);
-		
+		boost::shared_ptr<OPacket> oPack = boost::make_shared<OPacket>(&(*iPack), true);
+		cm->send(oPack);
 	}
 }
 

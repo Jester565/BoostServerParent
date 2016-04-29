@@ -12,7 +12,7 @@ class OPacket
 {
 	friend class HeaderManager;
 public:
-	OPacket(boost::shared_ptr<IPacket> iPack, bool copyData);
+	OPacket(IPacket* iPack, bool copyData);
 
 	OPacket(const char* loc = nullptr, IDType senderID = 0);
 
