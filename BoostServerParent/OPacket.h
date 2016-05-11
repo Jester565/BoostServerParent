@@ -1,12 +1,11 @@
 #pragma once
 #include "Macros.h"
-#include "IPacket.h"
 #include <string>
 #include <iostream>
 #include <boost/shared_ptr.hpp>
 #include <vector>
 
-class dataframe;
+class IPacket;
 
 class OPacket
 {
@@ -80,6 +79,18 @@ public:
 		return sendToIDs;
 	}
 
+	bool setData(boost::shared_ptr<std::string> data)
+	{
+		bool reset = !(data == nullptr);
+		this->data = data;
+		return reset;
+	}
+
+	boost::shared_ptr<std::string> getData()
+	{
+		return data;
+	}
+
 	friend std::ostream& operator << (std::ostream& oStream, OPacket& oPack)
 	{
 		oStream << "Printing out packet: " << std::endl << "loc key: " << oPack.locKey << std::endl;
@@ -103,4 +114,5 @@ protected:
 	char locKey[3];
 	IDType senderID;
 	std::vector <IDType> sendToIDs;
+	boost::shared_ptr<std::string> data;
 };

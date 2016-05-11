@@ -1,4 +1,5 @@
 #include "ClientManager.h"
+#include "Server.h"
 #include "IPacket.h"
 #include "OPacket.h"
 #include "TCPConnection.h"
@@ -19,7 +20,7 @@ Client* ClientManager::addClient(boost::shared_ptr <TCPConnection> tcpConnection
 	IDType id = aquireNextID();
 	if (id < MAX_CLIENTS)
 	{
-		client = new Client(tcpConnection, server, id);
+		client = server->createClient(tcpConnection, id);
 		clients.emplace(id, client);
 	}
 	else
@@ -109,6 +110,29 @@ void ClientManager::send(boost::shared_ptr<OPacket> oPack, IDType sendToID)
 		};
 	}
 	client->getTCPConnection()->send(oPack);
+}
+
+
+void ClientManager::send(boost::shared_ptr<std::vector<unsigned char>> sendData, IDType sendToID)
+{
+	Client* client = getClient(sendToID);
+	if (client == nullptr)
+	{
+		std::cerr << "Error occured in ClientManager:send, could not find client nubmer" << sendToID << std::endl;
+		switch (errorMode)
+		{
+		case THROW_ON_ERROR:
+			throw "Error in ClientManager:send";
+			break;
+		case RETURN_ON_ERROR:
+			return;
+			break;
+		case RECALL_ON_ERROR:
+			//send(sendData, sendToID);
+			return;
+		};
+	}
+	client->getTCPConnection()->send(sendData);
 }
 
 void ClientManager::send(boost::shared_ptr<OPacket> oPack, Client* client)

@@ -5,7 +5,6 @@
 #include <iostream>
 #include <boost/shared_ptr.hpp>
 
-class dataframe;
 class OPacket;
 
 class IPacket
@@ -32,6 +31,11 @@ public:
 	bool getServerRead()
 	{
 		return serverRead;
+	}
+
+	const boost::shared_ptr<std::string> getData() const
+	{
+		return data;
 	}
 
 	friend std::ostream& operator << (std::ostream& oStream, IPacket& iPack)
@@ -62,5 +66,6 @@ protected:
 	IDType sentFromID;
 	char locKey[3];
 	bool serverRead;
+	boost::shared_ptr<std::string> data;
 	std::vector <IDType>* sendToClients;
 };

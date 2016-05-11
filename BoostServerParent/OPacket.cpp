@@ -1,4 +1,5 @@
 #include "OPacket.h"
+#include "IPacket.h"
 #include <boost/make_shared.hpp>
 
 OPacket::OPacket(const char* loc, IDType senderID)

@@ -28,7 +28,7 @@ protected:
 	virtual void runAccept();
 
 	Server* server;
-	SocketType* tempSocket;
+	boost::asio::ip::tcp::socket* tempSocket;
 	boost::asio::ip::tcp::acceptor* acceptor;
 	int errorMode;
 };

@@ -1,4 +1,5 @@
 #include "PacketManager.h"
+#include "Server.h"
 #include "ClientManager.h"
 #include "IPacket.h"
 #include "OPacket.h"
@@ -8,8 +9,8 @@
 #include <iostream>
 #include <list>
 
-PacketManager::PacketManager()
-	:cm(nullptr)
+PacketManager::PacketManager(Server* server)
+	:server(server)
 {
 
 }
@@ -74,8 +75,8 @@ void PacketManager::process(boost::shared_ptr<IPacket> iPack)
 	}
 	else
 	{
-		boost::shared_ptr<OPacket> oPack = boost::make_shared<OPacket>(&(*iPack), true);
-		cm->send(oPack);
+		boost::shared_ptr<OPacket> oPack = server->createOPacket(iPack, true);
+		server->getClientManager()->send(oPack);
 	}
 }
 

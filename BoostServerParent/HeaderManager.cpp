@@ -1,8 +1,9 @@
 #include "HeaderManager.h"
+#include "Server.h"
+#include "IPacket.h"
 
-
-
-HeaderManager::HeaderManager()
+HeaderManager::HeaderManager(Server* server)
+	:server(server)
 {
 	union {
 		uint32_t i;
@@ -28,6 +29,27 @@ boost::shared_ptr<IPacket> HeaderManager::decryptHeader(boost::shared_ptr<std::v
 		return decryptHeaderAsBigEndian(data, size, cID);
 	}
 	return decryptHeaderFromBigEndian(data, size, cID);
+}
+
+
+boost::shared_ptr<std::vector<unsigned char>> HeaderManager::encryptHeaderAsBigEndian(boost::shared_ptr<OPacket> pack)
+{
+	return boost::make_shared<std::vector<unsigned char>>();
+}
+
+boost::shared_ptr<std::vector<unsigned char>> HeaderManager::encryptHeaderToBigEndian(boost::shared_ptr<OPacket> pack)
+{
+	return boost::make_shared<std::vector<unsigned char>>();
+}
+
+boost::shared_ptr<IPacket> HeaderManager::decryptHeaderAsBigEndian(boost::shared_ptr<std::vector<unsigned char>> data, unsigned int size, IDType cID)
+{
+	return boost::make_shared<IPacket>();
+}
+
+boost::shared_ptr<IPacket> HeaderManager::decryptHeaderFromBigEndian(boost::shared_ptr<std::vector<unsigned char>> data, unsigned int size, IDType cID)
+{
+	return boost::make_shared<IPacket>();
 }
 
 HeaderManager::~HeaderManager()

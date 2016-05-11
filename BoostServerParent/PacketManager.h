@@ -7,19 +7,14 @@
 
 class PKey;
 class IPacket;
-class ClientManager;
+class Server;
 
 class PacketManager
 {
 public:
 	static const int USE_PKEYS_SIZE = -1;
 	static const bool THROW_KEY_NOT_FOUND_EXCEPTION = false;
-	PacketManager();
-
-	void setClientManager(ClientManager* cm)
-	{
-		this->cm = cm;
-	}
+	PacketManager(Server* server);
 
 	void addPKey(PKey*);
 
@@ -31,11 +26,6 @@ public:
 
 	void process(boost::shared_ptr<IPacket> iPack);
 
-	ClientManager* getClientManager()
-	{
-		return cm;
-	}
-
 	~PacketManager();
 
 protected:
@@ -44,5 +34,5 @@ protected:
 	int binarySearchKey(bool& found, std::string key, int f = 0, int l = USE_PKEYS_SIZE);
 	std::vector <std::list <PKey*>> pKeys;
 	std::mutex pKeysMutex;
-	ClientManager* cm;
+	Server* server;
 };

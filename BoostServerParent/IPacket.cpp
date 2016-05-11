@@ -3,7 +3,7 @@
 #include <boost/make_shared.hpp>
 
 IPacket::IPacket()
-	: sendToClients(nullptr)
+	:sendToClients(nullptr), serverRead(false)
 {
 	locKey[0] = UNDEFINED_LOC;
 	locKey[1] = UNDEFINED_LOC;

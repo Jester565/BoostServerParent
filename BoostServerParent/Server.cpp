@@ -2,21 +2,24 @@
 #include "PacketManager.h"
 #include "ClientManager.h"
 #include "TCPAcceptor.h"
+#include "IPacket.h"
+#include "OPacket.h"
+#include "Client.h"
+#include "HeaderManager.h"
 #include <iostream>
 #include <google/protobuf/service.h>
 
 Server::Server()
 	:ioServiceThread(nullptr), ioService(nullptr), pm(nullptr), cm(nullptr), tcpAcceptor(nullptr)
 {
-
+	
 }
 
 void Server::createManagers()
 {
 	ioService = new boost::asio::io_service();
-	pm = new PacketManager();
+	pm = new PacketManager(this);
 	cm = new ClientManager(ioService, this);
-	pm->setClientManager(cm);
 }
 
 void Server::asyncInitServer(uint16_t port)
@@ -39,8 +42,32 @@ void Server::asyncIOService()
 	ioService->run();
 }
 
+
+HeaderManager* Server::createHeaderManager()
+{
+	return nullptr;
+}
+boost::shared_ptr<OPacket> Server::createOPacket()
+{
+	return boost::make_shared<OPacket>();
+}
+boost::shared_ptr<IPacket> Server::createIPacket()
+{
+	return boost::make_shared<IPacket>();
+}
+boost::shared_ptr<OPacket> Server::createOPacket(boost::shared_ptr<IPacket> iPack, bool copyData)
+{
+	return boost::make_shared<OPacket>(&(*iPack), copyData);
+}
+
+Client * Server::createClient(boost::shared_ptr<TCPConnection> tcpConnection, IDType id)
+{
+	return new Client(tcpConnection, this, id);
+}
+
 Server::~Server()
 {
+	ioService->stop();
 	if (cm != nullptr)
 	{
 		delete cm;
@@ -51,6 +78,7 @@ Server::~Server()
 		delete pm;
 		pm = nullptr;
 	}
+	ioService->reset();
 	if (ioService != nullptr)
 	{
 		delete ioService;

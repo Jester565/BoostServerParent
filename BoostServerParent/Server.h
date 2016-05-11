@@ -1,4 +1,5 @@
 #pragma once
+#include "Macros.h"
 #include <stdint.h>
 #include <thread>
 #include <boost/asio/io_service.hpp>
@@ -8,6 +9,21 @@
 class ClientManager;
 class PacketManager;
 class TCPAcceptor;
+class TCPConnection;
+class HeaderManager;
+class IPacket;
+class OPacket;
+class Client;
+
+#ifndef IPACKET_TYPE
+#define IPACKET_TYPE
+typedef IPacket IPacketType;
+#endif
+
+#ifndef OPACKET_TYPE
+#define OPACKET_TYPE
+typedef OPacket OPacketType;
+#endif
 
 class Server
 {
@@ -32,11 +48,18 @@ public:
 	{
 		return ioService;
 	}
+	
+	virtual HeaderManager* createHeaderManager();
+	virtual boost::shared_ptr<OPacket> createOPacket();
+	virtual boost::shared_ptr<IPacket> createIPacket();
+	virtual boost::shared_ptr<OPacket> createOPacket(boost::shared_ptr<IPacket> iPack, bool copyData);
+	virtual Client* createClient(boost::shared_ptr<TCPConnection> tcpConnection, IDType id);
+
+	void asyncIOService();
+
 	virtual ~Server();
 
 protected:
-	void asyncIOService();
-
 	boost::asio::io_service* ioService;
 	std::thread* ioServiceThread;
 	PacketManager* pm;

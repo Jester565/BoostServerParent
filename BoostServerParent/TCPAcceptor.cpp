@@ -18,12 +18,7 @@ TCPAcceptor::TCPAcceptor(Server* server)
 
 void TCPAcceptor::runAccept()
 {
-	if (tempSocket != nullptr)
-	{
-		delete tempSocket;
-		tempSocket = nullptr;
-	}
-	tempSocket = new SocketType(*server->getIOService());
+	tempSocket = new boost::asio::ip::tcp::socket(*server->getIOService());
 	acceptor->async_accept(*tempSocket, boost::bind(&TCPAcceptor::asyncAcceptHandler, shared_from_this(), boost::asio::placeholders::error));
 }
 
@@ -35,6 +30,7 @@ void TCPAcceptor::detach(uint16_t port)
 
 void TCPAcceptor::asyncAcceptHandler(const boost::system::error_code& error)
 {
+	std::cout << "Accepted" << std::endl;
 	if (error)
 	{
 		std::cerr << "Error occured in TCPAcceptor: " << error.message() << std::endl;
@@ -52,7 +48,8 @@ void TCPAcceptor::asyncAcceptHandler(const boost::system::error_code& error)
 		};
 	}
 
-	boost::shared_ptr<TCPConnection> tcpConnection = boost::make_shared<TCPConnection>(server, tempSocket, nullptr);
+	boost::shared_ptr<TCPConnection> tcpConnection = boost::make_shared<TCPConnection>(server, tempSocket);
+	tcpConnection->start();
 	server->getClientManager()->addClient(tcpConnection);
 	runAccept();
 }

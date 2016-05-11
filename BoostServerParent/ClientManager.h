@@ -2,6 +2,7 @@
 #include "Macros.h"
 #include <boost/asio/io_service.hpp>
 #include <mutex>
+#include <map>
 
 class TCPConnection;
 class PacketManager;
@@ -13,7 +14,7 @@ class Server;
 class ClientManager
 {
 public:
-	static const unsigned int MAX_CLIENTS = 255;
+	static const unsigned int MAX_CLIENTS = 65535;
 
 	ClientManager(boost::asio::io_service* ioService, Server* server);
 
@@ -43,6 +44,8 @@ public:
 
 	virtual void sendToAllExcept(boost::shared_ptr<OPacket> oPack, IDType* excludeIDs, unsigned int size);
 
+	virtual void send(boost::shared_ptr<std::vector<unsigned char>> sendData, IDType sendToID);
+	
 	void setErrorMode(int mode)
 	{
 		errorMode = mode;
