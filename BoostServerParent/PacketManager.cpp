@@ -82,20 +82,32 @@ void PacketManager::process(boost::shared_ptr<IPacket> iPack)
 
 int PacketManager::binarySearchKey(bool& found, std::string key, int f, int l)
 {
+	if (pKeys.size() == 0)
+	{
+		found = false;
+		return 0;
+	}
 	if (l == USE_PKEYS_SIZE)
 	{
 		l = pKeys.size() - 1;
 	}
-	if (l < f)
-	{
-		found = false;
-		return f;
-	}
 	std::string midKey = pKeys[(l + f) / 2].front()->getKey();
-	if (midKey < key)
+	if (midKey < key) {
+		if ((l + f) / 2 + 1 > l)
+		{
+			found = false;
+			return (l + f) / 2 + 1;
+		}
 		return binarySearchKey(found, key, (l + f) / 2 + 1, l);
-	else if (midKey > key)
+	}
+	else if (midKey > key) {
+		if ((l + f) / 2 - 1 < f)
+		{
+			found = false;
+			return (l + f) / 2;
+		}
 		return binarySearchKey(found, key, f, (l + f) / 2 - 1);
+	}
 	found = true;
 	return (l + f) / 2;
 }

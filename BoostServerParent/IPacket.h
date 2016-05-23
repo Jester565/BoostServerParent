@@ -23,7 +23,7 @@ public:
 		return locKey;
 	}
 
-	std::vector <IDType>* getSendToClients()
+	std::vector <IDType> getSendToClients()
 	{
 		return sendToClients;
 	}
@@ -42,19 +42,12 @@ public:
 	{
 		oStream << "Printing out packet: " << std::endl << "loc key: " << iPack.locKey << std::endl;
 		oStream << "Sent from: " << iPack.sentFromID << std::endl;
-		if (iPack.sendToClients == nullptr)
+		oStream << "Send to clients: size = " << iPack.sendToClients.size() << "  Items: ";
+		for (int i = 0; i < iPack.sendToClients.size(); i++)
 		{
-			oStream << "Send to clients: size = 0" << std::endl;
+			oStream << iPack.sendToClients.at(i) << " ";
 		}
-		else
-		{
-			oStream << "Send to clients: size = " << iPack.sendToClients->size() << "  Items: ";
-			for (int i = 0; i < iPack.sendToClients->size(); i++)
-			{
-				oStream << iPack.sendToClients->at(i) << " ";
-			}
-			oStream << std::endl;
-		}
+		oStream << std::endl;
 		return oStream;
 	}
 
@@ -67,5 +60,5 @@ protected:
 	char locKey[3];
 	bool serverRead;
 	boost::shared_ptr<std::string> data;
-	std::vector <IDType>* sendToClients;
+	std::vector <IDType> sendToClients;
 };

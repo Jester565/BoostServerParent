@@ -38,10 +38,7 @@ OPacket::OPacket(IPacket* iPack, bool copyData)
 	locKey[1] = iPack->getLocKey()[1];
 	locKey[2] = '\0';
 	senderID = iPack->getSentFromID();
-	if (iPack->getSendToClients() != nullptr)
-	{
-		sendToIDs = *iPack->getSendToClients();
-	}
+	sendToIDs = iPack->getSendToClients();
 }
 
 OPacket::~OPacket()

@@ -50,7 +50,7 @@ public:
 	virtual ~TCPConnection();
 
 protected:
-	boost::shared_ptr<std::vector<unsigned char>> receiveStorage;
+	std::vector<unsigned char>* receiveStorage;
 	std::vector<unsigned char>* sendStorage;
 
 	boost::asio::ip::tcp::socket* socket;

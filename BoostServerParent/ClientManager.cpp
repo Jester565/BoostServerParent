@@ -62,16 +62,14 @@ bool ClientManager::removeClient(IDType id)
 
 IDType ClientManager::aquireNextID()
 {
-	int trackNum = 1;
-	for (std::map <IDType, Client*>::iterator mapIter = clients.begin(); mapIter != clients.end(); mapIter++)
+	for (int i = 1; i < MAX_CLIENTS; i++)
 	{
-		if (trackNum != mapIter->first)
+		if (clients.find(i) == clients.end())
 		{
-			break;
+			return i;
 		}
-		trackNum++;
 	}
-	return trackNum;
+	return 0;
 }
 
 void ClientManager::send(boost::shared_ptr<OPacket> oPack)
