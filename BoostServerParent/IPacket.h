@@ -51,7 +51,7 @@ public:
 		return oStream;
 	}
 
-	virtual std::vector<boost::shared_ptr<OPacket>>* IPacket::convertToOPacks(bool copyData);
+	virtual std::vector<boost::shared_ptr<OPacket>>* convertToOPacks(bool copyData);
 
 	virtual ~IPacket();
 
