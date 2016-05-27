@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoostServerParent", "BoostServerParent\BoostServerParent.vcxproj", "{7DFB5FED-104C-42FD-AC33-D0522573DC90}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BoostServerParent", "BoostServerParent.vcxproj", "{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7DFB5FED-104C-42FD-AC33-D0522573DC90}.Debug|x64.ActiveCfg = Debug|x64
-		{7DFB5FED-104C-42FD-AC33-D0522573DC90}.Debug|x64.Build.0 = Debug|x64
-		{7DFB5FED-104C-42FD-AC33-D0522573DC90}.Debug|x86.ActiveCfg = Debug|Win32
-		{7DFB5FED-104C-42FD-AC33-D0522573DC90}.Debug|x86.Build.0 = Debug|Win32
-		{7DFB5FED-104C-42FD-AC33-D0522573DC90}.Release|x64.ActiveCfg = Release|x64
-		{7DFB5FED-104C-42FD-AC33-D0522573DC90}.Release|x64.Build.0 = Release|x64
-		{7DFB5FED-104C-42FD-AC33-D0522573DC90}.Release|x86.ActiveCfg = Release|Win32
-		{7DFB5FED-104C-42FD-AC33-D0522573DC90}.Release|x86.Build.0 = Release|Win32
+		{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}.Debug|x64.ActiveCfg = Debug|x64
+		{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}.Debug|x64.Build.0 = Debug|x64
+		{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}.Debug|x86.ActiveCfg = Debug|Win32
+		{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}.Debug|x86.Build.0 = Debug|Win32
+		{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}.Release|x64.ActiveCfg = Release|x64
+		{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}.Release|x64.Build.0 = Release|x64
+		{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}.Release|x86.ActiveCfg = Release|Win32
+		{AB66FCEF-F4C5-4A34-9112-C85723E18D2D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
