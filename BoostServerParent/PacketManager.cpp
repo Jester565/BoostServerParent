@@ -44,7 +44,7 @@ bool PacketManager::removePKey(PKey* pKey)
 			if (pKey == *it)
 			{
 				pKeys.at(index).erase(it);
-				if (pKeys.size() == 0)
+				if (pKeys.at(index).size() == 0)
 				{
 					pKeys.erase(pKeys.begin() + index);
 				}

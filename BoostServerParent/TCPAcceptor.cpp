@@ -56,7 +56,10 @@ void TCPAcceptor::asyncAcceptHandler(const boost::system::error_code& error)
 
 TCPAcceptor::~TCPAcceptor()
 {
-	acceptor->cancel();
+	if (acceptor != nullptr)
+	{
+		acceptor->cancel();
+	}
 	if (tempSocket != nullptr)
 	{
 		delete tempSocket;

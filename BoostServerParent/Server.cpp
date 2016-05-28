@@ -68,6 +68,7 @@ Client * Server::createClient(boost::shared_ptr<TCPConnection> tcpConnection, ID
 Server::~Server()
 {
 	ioService->stop();
+
 	if (cm != nullptr)
 	{
 		delete cm;
@@ -78,16 +79,6 @@ Server::~Server()
 		delete pm;
 		pm = nullptr;
 	}
-	ioService->reset();
-	if (ioService != nullptr)
-	{
-		delete ioService;
-		ioService = nullptr;
-	}
-	if (ioServiceThread != nullptr)
-	{
-		delete ioServiceThread;
-		ioServiceThread = nullptr;
-	}
+
 	google::protobuf::ShutdownProtobufLibrary();
 }

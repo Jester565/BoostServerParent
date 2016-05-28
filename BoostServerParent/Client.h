@@ -4,8 +4,6 @@
 #include <boost/asio/io_service.hpp>
 #include <boost/shared_ptr.hpp>
 
-//change test 123
-
 class TCPConnection;
 class Server;
 
