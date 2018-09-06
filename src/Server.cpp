@@ -7,7 +7,6 @@
 #include "Client.h"
 #include "HeaderManager.h"
 #include <iostream>
-#include <google/protobuf/service.h>
 
 Server::Server()
 	:ioServiceThread(nullptr), ioService(nullptr), pm(nullptr), cm(nullptr), tcpAcceptor(nullptr)
@@ -79,6 +78,4 @@ Server::~Server()
 		delete pm;
 		pm = nullptr;
 	}
-
-	google::protobuf::ShutdownProtobufLibrary();
 }
